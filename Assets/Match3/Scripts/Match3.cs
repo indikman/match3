@@ -19,13 +19,15 @@ namespace IndiMatchThree
 
         private void Start()
         {
-            //Create the grid system
-            grid = GridSystem2D<GridObject<Gem>>.VerticalGrid(width, height, cellSize, originPosition, debug);
+            InitializeGrid();
         }
 
         // Init grid
         void InitializeGrid()
         {
+            //Create the grid system
+            grid = GridSystem2D<GridObject<Gem>>.VerticalGrid(width, height, cellSize, originPosition, debug);
+
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)

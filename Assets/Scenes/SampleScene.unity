@@ -157,6 +157,14 @@ MonoBehaviour:
   cellSize: 1
   originPosition: {x: 0, y: 0, z: 0}
   debug: 1
+  gemPrefab: {fileID: 5027779996205861569, guid: efb7f7e79ea93f2429a4bc87e8ddb422, type: 3}
+  gemTypes:
+  - {fileID: 11400000, guid: 38351cbc023053f40b6711e2cccf369b, type: 2}
+  - {fileID: 11400000, guid: 81a23fb6988a6cd46a1a0637f6abc860, type: 2}
+  - {fileID: 11400000, guid: 90bd89bc801648b4cb727371168b2b02, type: 2}
+  - {fileID: 11400000, guid: 4c8146081bb9ba04ea794b2315ec1935, type: 2}
+  - {fileID: 11400000, guid: ac0a429ea8e06e049b781cb0b90d59e7, type: 2}
+  - {fileID: 11400000, guid: 9b001569ad275ee4f91d5e83e550636d, type: 2}
 --- !u!4 &507243352
 Transform:
   m_ObjectHideFlags: 0
@@ -253,7 +261,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -303,7 +311,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 4, y: 4, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
