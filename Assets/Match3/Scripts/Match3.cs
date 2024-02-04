@@ -17,10 +17,54 @@ namespace IndiMatchThree
 
         GridSystem2D<GridObject<Gem>> grid;
 
+        Vector2Int selectedGem = new Vector2Int(-1, -1);
+
+        InputReader inputReader;
+        private void Awake()
+        {
+            inputReader = gameObject.AddComponent<InputReader>();
+        }
+
         private void Start()
         {
             InitializeGrid();
+
+            inputReader.Fire += OnSelectedGem;
         }
+
+        private void OnDestroy()
+        {
+            inputReader.Fire -= OnSelectedGem;
+        }
+
+        private void OnSelectedGem()
+        {
+            var gridPos = grid.GetXY(Camera.main.ScreenToWorldPoint(inputReader.Selected));
+
+            if(selectedGem == gridPos)
+            {
+                DeselectGem();
+            }else if(selectedGem==Vector2Int.one * -1)
+            {
+                SelectGem(gridPos);
+            }
+            else
+            {
+                StartCoroutine(RunGameLoop(selectedGem, gridPos));
+            }
+        }
+
+        IEnumerator RunGameLoop(Vector2Int gridPositionA, Vector2Int gridPositionB)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private void SelectGem(Vector2Int gridPos)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private void DeselectGem() => selectedGem = new Vector2Int(-1, -1);
 
         // Init grid
         void InitializeGrid()
