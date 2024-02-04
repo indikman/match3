@@ -15,20 +15,20 @@ namespace IndiMatchThree
 
         public Vector2 Selected => selectAction.ReadValue<Vector2>();
 
-        private void Start()
+        void Start()
         {
             playerInput = GetComponent<PlayerInput>();
-            selectAction = playerInput.actions["select"];
-            fireAction = playerInput.actions["fire"];
+            selectAction = playerInput.actions["Select"];
+            fireAction = playerInput.actions["Fire"];
 
             fireAction.performed += OnFire;
         }
 
-        private void OnDestroy()
+        void OnDestroy()
         {
             fireAction.performed -= OnFire;
         }
 
-        private void OnFire(InputAction.CallbackContext obj) => Fire?.Invoke();
+        public void OnFire(InputAction.CallbackContext obj) => Fire?.Invoke();
     }
 }

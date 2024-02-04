@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 namespace IndiMatchThree
 {
@@ -14,6 +15,8 @@ namespace IndiMatchThree
 
         [SerializeField] Gem gemPrefab;
         [SerializeField] GemType[] gemTypes;
+        [SerializeField] Ease ease=Ease.OutQuad;
+        [SerializeField] float animTime;
 
         GridSystem2D<GridObject<Gem>> grid;
 
@@ -22,7 +25,7 @@ namespace IndiMatchThree
         InputReader inputReader;
         private void Awake()
         {
-            inputReader = gameObject.AddComponent<InputReader>();
+            inputReader = gameObject.GetComponent<InputReader>();
         }
 
         private void Start()
@@ -41,6 +44,8 @@ namespace IndiMatchThree
         {
             var gridPos = grid.GetXY(Camera.main.ScreenToWorldPoint(inputReader.Selected));
 
+            if (!IsValidPosition(gridPos) || IsEmptyPosition(gridPos)) return;
+
             if(selectedGem == gridPos)
             {
                 DeselectGem();
@@ -54,15 +59,34 @@ namespace IndiMatchThree
             }
         }
 
+        private bool IsEmptyPosition(Vector2Int gridPos) => grid.GetValue(gridPos.x, gridPos.y) == null;
+
+        private bool IsValidPosition(Vector2Int gridPos) => gridPos.x >= 0 && gridPos.y >= 0 && gridPos.x <= width && gridPos.y <= height;
+
         IEnumerator RunGameLoop(Vector2Int gridPositionA, Vector2Int gridPositionB)
         {
-            throw new System.NotImplementedException();
+            yield return StartCoroutine(SwapGems(gridPositionA, gridPositionB));
+            
+            DeselectGem();
+
+            yield return null;
         }
 
-        private void SelectGem(Vector2Int gridPos)
+        IEnumerator SwapGems(Vector2Int gridPositionA, Vector2Int gridPositionB)
         {
-            throw new System.NotImplementedException();
+            var gridObjectA = grid.GetValue(gridPositionA.x, gridPositionA.y);
+            var gridObjectB = grid.GetValue(gridPositionB.x, gridPositionB.y);
+
+            gridObjectA.GetValue().transform.DOLocalMove(grid.GetWorldPositionCenter(gridPositionB.x, gridPositionB.y), animTime).SetEase(ease);
+            gridObjectB.GetValue().transform.DOLocalMove(grid.GetWorldPositionCenter(gridPositionA.x, gridPositionA.y), animTime).SetEase(ease);
+
+            grid.SetValue(gridPositionA.x, gridPositionA.y, gridObjectB);
+            grid.SetValue(gridPositionB.x, gridPositionB.y, gridObjectA);
+
+            yield return new WaitForSeconds(animTime);
         }
+
+        private void SelectGem(Vector2Int gridPos) => selectedGem = gridPos;
 
         private void DeselectGem() => selectedGem = new Vector2Int(-1, -1);
 

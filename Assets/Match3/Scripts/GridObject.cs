@@ -2,7 +2,7 @@
 
 namespace IndiMatchThree
 {
-    public partial class GridObject<T>
+    public class GridObject<T>
     {
 
         GridSystem2D<GridObject<T>> grid;
@@ -17,7 +17,9 @@ namespace IndiMatchThree
             this.y = y;
         }
 
-        internal void SetValue(T gem)
+        public T GetValue() => gem;
+
+        public void SetValue(T gem)
         {
             this.gem = gem;
         }
