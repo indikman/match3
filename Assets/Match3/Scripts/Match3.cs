@@ -114,13 +114,53 @@ namespace IndiMatchThree
             grid.SetValue(x, y, gridObject);
         }
 
-        // Read player input and swap gems
 
-        // Start corouting
+        List<Vector2Int> FindMatches()
+        {
+            HashSet<Vector2Int> matches = new();
 
-        // Swap animation
+            // Horizontal
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    var gemA = grid.GetValue(x, y);
+                    var gemB = grid.GetValue(x+1, y);
+                    var gemC = grid.GetValue(x+2, y);
 
-        // Matches?
+                    if(gemA==null||gemB==null||gemC==null) continue;
+
+                    if(gemA.GetValue().GetType() == gemB.GetValue().GetType() && gemB.GetValue().GetType() == gemC.GetValue().GetType())
+                    {
+                        matches.Add(new Vector2Int(x, y));
+                        matches.Add(new Vector2Int(x+1, y));
+                        matches.Add(new Vector2Int(x+2, y));
+                    }
+                }
+            }
+
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    var gemA = grid.GetValue(x, y);
+                    var gemB = grid.GetValue(x, y+1);
+                    var gemC = grid.GetValue(x, y+2);
+
+                    if (gemA == null || gemB == null || gemC == null) continue;
+
+                    if (gemA.GetValue().GetType() == gemB.GetValue().GetType() && gemB.GetValue().GetType() == gemC.GetValue().GetType())
+                    {
+                        matches.Add(new Vector2Int(x, y));
+                        matches.Add(new Vector2Int(x, y+1));
+                        matches.Add(new Vector2Int(x, y+2));
+                    }
+                }
+            }
+
+            return new List<Vector2Int>(matches);
+        }
+
 
         // Explode gems
 
