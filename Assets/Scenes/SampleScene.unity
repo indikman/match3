@@ -167,8 +167,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4c8146081bb9ba04ea794b2315ec1935, type: 2}
   - {fileID: 11400000, guid: ac0a429ea8e06e049b781cb0b90d59e7, type: 2}
   - {fileID: 11400000, guid: 9b001569ad275ee4f91d5e83e550636d, type: 2}
-  ease: 6
-  animTime: 0.5
+  ease: 27
+  fallEase: 16
+  animTimeSwap: 0.3
+  animTimeFall: 0.1
 --- !u!4 &507243352
 Transform:
   m_ObjectHideFlags: 0
@@ -363,7 +365,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 1}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

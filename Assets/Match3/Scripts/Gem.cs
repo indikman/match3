@@ -14,5 +14,7 @@ namespace IndiMatchThree
         }
 
         public GemType GetType() => type;
+
+        public void DestroyGem()=>Destroy(gameObject);
     }
 }
